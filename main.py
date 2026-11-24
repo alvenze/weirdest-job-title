@@ -24,6 +24,9 @@ def main() -> int:
     out_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
+    # The gate counts characters, so confirm the text round-trips as UTF-8
+    # with no replacement before writing it out.
+    text.encode("utf-8")
     with open(path, "w", encoding="utf-8", newline="") as f:
         f.write(text)
     print(f"wrote {len(text)} chars to {path}")
